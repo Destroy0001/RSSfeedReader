@@ -1,0 +1,95 @@
+<!doctype html>
+<html >
+	<head>
+		<link href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel = "stylesheet">
+		<link href = "css/main.css" rel="stylesheet">
+		
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.js"></script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="js/angularController.js"></script>
+		
+		<title>Your Feed Reader</title>
+	</head>
+	
+	<body >
+		<!--This div is where all the angular magic happens, everything dependent on angular is inside this  -->
+		
+		<div id="wrapper" ng-app="feedReaderApp" ng-controller="feedController">
+			<!-- sidebar to store all feed buttons -->
+			<div id="sidebarWrapper">
+			
+				<!-- Button to create new feed -->
+				<div id="newFeedButtonDiv">
+					<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myFeedForm">Click here to add new feed</button>
+				</div>
+				
+				<!-- cloud of added feeds -->
+				<div id="feedIcons"  >
+					<span ng-repeat="feed in feeds">
+						<button  type="button" ng-click="loadFeedData(feed.feedUrl);" class="btn feedButtons">
+							{{feed.feedTitle}} 
+						</button>
+						<i ng-click="deleteFeed($index);" class="glyphicon glyphicon-remove feedCloseIcon"></i>
+					</span>
+				</div>
+				
+			</div>
+			
+			<!-- Main page, shows the feed content as per the selected feed -->
+			<div id="pageContentWrapper">
+				<div id="header">
+					<h3 id="feedHeader">{{activeFeed.title}}</h1>
+					<h5 id="feedDescription">{{activeFeed.description}}</h3>
+					<hr/>
+				</div>
+				
+				<div id="feed">
+					<div class="feedPost panel panel-default" ng-repeat="item in activeFeed.entries">
+						<div class="panel-body">
+							<a href="{{item.link}}" target="_blank">
+								<div class="feedthumbnail">
+									<img src="{{item.imgSrc}}"></img>
+								</div>
+								<hr/>
+								<div class="feedTitle" >{{item.title}}</div>
+								<hr/>
+								<div class="feedDate">{{item.date | date:"fullDate"}}</div>
+								<div class="feedSnippet">{{item.contentSnippet}}</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	
+		<!-- New feed addition form -->
+		<div id="myFeedForm" class="modal fade" role="dialog">
+		
+			<div class="modal-dialog  modal-sm">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Add New Feed</h4>
+			      </div>
+			      <div class="modal-body">
+			     	 <form id="addFeedForm">
+						<input type="text" class="form-control" name="feedTitle" id="feedTitle" placeholder="Enter Feed Title"/>
+						<br/>
+						<input type="text" class="form-control" name="feedUrl" id="feedUrl" placeholder="Enter feed url"/>
+						<hr/>
+						<button type="button" id="insertFeed" class="btn btn-default" data-dismiss="modal">Add Feed</button>
+			    	</form>
+		    	  </div>
+		   	 </div>
+		  </div>
+		  
+		</div>
+		
+	</body>
+</html>
