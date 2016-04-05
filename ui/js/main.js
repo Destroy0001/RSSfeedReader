@@ -4,13 +4,13 @@
  */
 
 /*initialize google feed api*/
-google.load("feeds", "1");
+google.load('feeds', '1');
 
 
 /*pick feeds from localStorage to save them in an object*/
 myFeeds = (function(){
 				/* creating an empty feeds object  */ 
-			    var myFeeds = {
+				var myFeeds = {
 					feeds:[],
 					saveFeeds:function(feed){
 						this.feeds.push(feed);
@@ -34,32 +34,54 @@ myFeeds = (function(){
 
 
 $(function(){
+	/*Adding a custom validation method to jQuery validator to make sure only unique feeds are added*/
+	jQuery.validator.addMethod('uniqueFeed', 
+										function(value,element,type){
+											for(i in myFeeds.feeds){
+												if(myFeeds.feeds[i][type] === value){
+													return false
+												}
+												
+											}
+											return true; 
+										
+									},
+								'Feed url or Feed title already exists.');
 
 	
 	/* Validations for new feed addition form, using jQuery validate to speed things up and to keep the code clean */
-	$("#addFeedForm").validate({
+	$('#addFeedForm').validate({
 		rules :{
 			feedUrl: {
-	            required : true, 
-	            url:true
-	        },
-	
+				required : true, 
+				url:true,
+				uniqueFeed:'feedUrl'
+			},
+			
 			feedTitle:{
 				required:true,
-				maxlength: 25
+				maxlength: 25,
+				uniqueFeed:'feedTitle'
 			}
-	    },
-	    messages :{
-	    	feedUrl: {
-	            required : 'Enter Feed Url.',
-	            url:' Invalid Url.'
-	        }, 
-	        feedTitle:{
-	        	required: 'Enter Feed Title.',
-	        	maxlength: 'Title can be at max 25 characters.'
-	        }
-	    	
-	    }
+		},
+		messages :{
+			feedUrl: {
+				required : 'Enter Feed Url.',
+				url:' Invalid Url.'
+			}, 
+			feedTitle:{
+				required: 'Enter Feed Title.',
+				maxlength: 'Title can be at max 25 characters.'
+			}	
+		}
+	});
+	
+	
+	$('#addNewFeed').click(function(){
+		var url = $('#feedUrl').val().trim();
+		if(!url){
+			$('#invalidFeedError').html('');
+		}
 	});
 	
 });

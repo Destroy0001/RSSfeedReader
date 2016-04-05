@@ -25,7 +25,7 @@
 			
 				<!-- Button to create new feed -->
 				<div id="newFeedButtonDiv">
-					<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myFeedForm">Click here to add new feed</button>
+					<button id="addNewFeed" type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myFeedForm">Click here to add new feed</button>
 				</div>
 				
 				<!-- cloud of added feeds -->
@@ -76,6 +76,7 @@
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
 			        <h4 class="modal-title">Add New Feed</h4>
+			        <span id="invalidFeedError"></span>
 			      </div>
 			      <div class="modal-body">
 			     	 <form id="addFeedForm">
@@ -88,7 +89,6 @@
 		    	  </div>
 		   	 </div>
 		  </div>
-		  
 		</div>
 		
 	</body>

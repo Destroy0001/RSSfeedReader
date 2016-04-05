@@ -5,26 +5,26 @@
  * */
 
 
-var feedReaderApp = angular.module("feedReaderApp",[]);
+var feedReaderApp = angular.module('feedReaderApp',[]);
 
-feedReaderApp.controller ("feedController",function($scope){
+feedReaderApp.controller ('feedController',function($scope){
 				
 							
 							if(localStorage.myFeeds)
 								$scope.feeds = JSON.parse(localStorage.myFeeds);
 							else
-								$scope.feeds = []
+								$scope.feeds = [];
 					
-							$scope.activeFeed =  {
-														title:"Your feed would be shown below",
-														description: "Choose a feed from the sidebar or click the blue button on the top of the sidebar to add a feed"
-											  	};
+							$scope.activeFeed = {
+														title:'Your feed would be shown below',
+														description: 'Choose a feed from the sidebar or click the blue button on the top of the sidebar to add a feed'
+												};
 							
 							/*fetches feed information and then loads to the feed view*/
 							$scope.loadFeedData = function(feedurl){
 								
 								/*scrolling to the top of the page for the new feed.*/
-								$("html, body").animate({ scrollTop: 0 }, "slow");
+								$('html, body').animate({ scrollTop: 0 }, 'slow');
 								
 								/*initializing feed config*/
 								/*hardcoded to get top 25 posts in the feed, would add ui later for the user to choose number of posts*/
@@ -46,7 +46,7 @@ feedReaderApp.controller ("feedController",function($scope){
 											 
 											/*look for thumbnails in the feed*/
 											var thumbNails = entries.xmlNode.getElementsByTagNameNS('*','thumbnail');
-											var feedContent = $("<div/>").html(entries.content); 
+											var feedContent = $('<div/>').html(entries.content); 
 											var date = new Date(entries.publishedDate);
 											
 											if(thumbNails.length > 0){
@@ -58,7 +58,7 @@ feedReaderApp.controller ("feedController",function($scope){
 											
 											/*if no feed image found use a dummy image*/
 											if(!imgSrc){
-												imgSrc = "img/Speak-Dummy.jpg"
+												imgSrc = 'img/Speak-Dummy.jpg'
 											}
 											
 											/*pushing all calculated data to controller scope*/
@@ -72,8 +72,8 @@ feedReaderApp.controller ("feedController",function($scope){
 									}else{
 										/* if invalid url show an empty feed*/
 										$scope.activeFeed = {
-																title:"Invalid feed url.",
-																description: "No RSS feed found on the saved url."
+																title:'Invalid feed url.',
+																description: 'No RSS feed found on the saved url.'
 																	
 														    };
 										setTimeout(function(){
@@ -94,20 +94,37 @@ feedReaderApp.controller ("feedController",function($scope){
 							}
 							
 							/*adding new feeds*/
-							$("#insertFeed").click(function(){
-								if(!$("#addFeedForm").valid())
+							$('#insertFeed').click(function(){
+								
+								
+								if(!$('#addFeedForm').valid())
 									return false; 
 								
-								var feedUrl = $("#feedUrl").val();
-								var feedTitle = $("#feedTitle").val(); 
+								var feedUrl = $('#feedUrl').val();
+								var feedTitle = $('#feedTitle').val(); 
+								var feed = new google.feeds.Feed(feedUrl);
 								
-								$scope.feeds = myFeeds.saveFeeds({feedUrl:feedUrl,feedTitle:feedTitle});
-								setTimeout(function(){
-									$scope.$apply();
+								/*checking the feed via the API to see if it is valid or not, if it is valid, add it, else show an error*/
+								feed.load(function(result){
+									if(!result.error){
+										
+										$scope.feeds = myFeeds.saveFeeds({feedUrl:feedUrl,feedTitle:feedTitle});
+										setTimeout(function(){
+											$scope.$apply();
+										});
+										
+										$('#feedUrl').val('');
+										$('#feedTitle').val(''); 
+										
+									}else{
+										$('#myFeedForm').modal('show');
+										$('#invalidFeedError').html('<strong>No valid feed found for the feed url.</strong>');
+									}
 								});
 								
-								$("#feedUrl").val("");
-								$("#feedTitle").val(""); 
+								
+								
+								
 							}); 
 							
 							
