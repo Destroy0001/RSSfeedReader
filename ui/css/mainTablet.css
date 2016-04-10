@@ -1,0 +1,62 @@
+/*
+css for device sizes larger than 720px and less than 920px
+
+*/
+
+#sidebarWrapper {
+	z-index: 1000;
+	position: fixed;
+	width: 200px;;
+	height: 100%;
+}
+
+#pageContentWrapper {
+	width: calc(100% - 200px);
+	position: absolute;
+	left: 200px;
+}
+
+#header {
+	width: 100%;
+	position: fixed;
+	top: 0%;
+	background: white;
+	max-height: 200px;
+}
+
+#newFeedButtonDiv {
+	margin-bottom: 2%;
+}
+
+#feed {
+	margin: 10px 10px 15%;
+	top: 200px;
+	width: 80%;
+	max-width: 800px;
+}
+
+#feedHeader {
+	font-size: 25px;
+	max-width: 500px;
+	width: 50%;
+	margin: 12px 14% 0px 14%;
+}
+
+#feedDescription {
+	max-width: 500px;
+	margin: 10px 14% 10px 14%;
+}
+
+.feedPost {
+	width: 200px;
+	float: right;
+	margin-bottom: 2%;
+	margin-left: 2%;
+}
+
+.feedthumbnail {
+	position: relative;
+	height: 150px;
+	width: 150px;
+	overflow: hidden;
+}

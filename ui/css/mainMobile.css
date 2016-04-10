@@ -1,0 +1,51 @@
+/* CSS for devices lesser than screen sizes less than 720px*/
+#sidebarWrapper {
+	width: 100%;
+	height: 20%;
+	background: #556;
+	padding-bottom: 2%;
+	overflow-y: auto;
+	clear: both;
+}
+
+#newFeedButtonDiv {
+	z-index: 1000;
+	width: 100%;
+}
+
+#feedIcons {
+	top: 8%;
+}
+
+#pageContentWrapper {
+	width: 100%;
+	top: 32%;
+}
+
+#header {
+	width: 100%;
+	background: white;
+	top:
+}
+
+#feed {
+	width: 80%;
+	left: 11%;
+}
+
+#feedHeader {
+	color: #555555;
+}
+
+#feedDescription {
+	margin: 1px 24% 1px 24%;
+}
+
+.feedPost {
+	width: 80%;
+}
+
+.feedthumbnail {
+	position: relative;
+	overflow: hidden;
+}

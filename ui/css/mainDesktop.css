@@ -1,0 +1,58 @@
+/*css for device sizes of more than 925px */
+
+#sidebarWrapper {
+	z-index: 1000;
+	position: fixed;
+	width: 250px;
+	height: 100%;
+}
+
+#pageContentWrapper {
+	width: calc(100% - 250px);
+	position: absolute;
+	left: 250px;
+	max-height: 200px;
+}
+
+#header {
+	width: 100%;
+	position: fixed;
+	top: 0%;
+	background: white;
+}
+
+#newFeedButtonDiv {
+	margin-bottom: 2%;
+}
+
+#feed {
+	margin: 10px 10px 15%;
+	top: 200px;
+	left: 10%;
+	width: 80%;
+}
+
+#feedHeader {
+	color: #555555;
+	word-break: break-word;
+	width: 50%;
+	margin: 12px 14% 0px 14%;
+}
+
+#feedDescription {
+	margin: 10px 14% 10px 14%;
+}
+
+.feedPost {
+	width: 30%;
+	float: left;
+	margin-bottom: 2%;
+	margin-left: 2%
+}
+
+.feedthumbnail {
+	position: relative;
+	max-height: 250px;
+	max-width: 250px;
+	overflow: hidden;
+}

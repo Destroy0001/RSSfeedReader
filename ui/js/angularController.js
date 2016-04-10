@@ -17,7 +17,7 @@ feedReaderApp.controller ('feedController',function($scope){
 					
 							$scope.activeFeed = {
 														title:'Your feed would be shown below',
-														description: 'Choose a feed from the sidebar or click the blue button on the top of the sidebar to add a feed'
+														description: ''
 												};
 							
 							/*fetches feed information and then loads to the feed view*/
