@@ -21,7 +21,15 @@ feedReaderApp.controller ('feedController',function($scope){
 												};
 							
 							/*fetches feed information and then loads to the feed view*/
-							$scope.loadFeedData = function(feedurl){
+							$scope.loadFeedData = function(feedurl,feedID){
+								
+								/*
+								 Clearing selection status from old feed button and 
+								 Adding selection status to new feed button
+								 */
+								selectedFeed = feedID;
+								$('.feedButtonSelected').removeClass('feedButtonSelected');
+								$('#feedbutton'+feedID).addClass('feedButtonSelected');
 								
 								/*scrolling to the top of the page for the new feed.*/
 								$('html, body').animate({ scrollTop: 0 }, 'slow');
@@ -29,7 +37,6 @@ feedReaderApp.controller ('feedController',function($scope){
 								/*initializing feed config*/
 								/*hardcoded to get top 25 posts in the feed, would add ui later for the user to choose number of posts*/
 								var feed = new google.feeds.Feed(feedurl);
-								
 								feed.setResultFormat(google.feeds.Feed.MIXED_FORMAT);
 								feed.setNumEntries(25);
 								
@@ -75,7 +82,7 @@ feedReaderApp.controller ('feedController',function($scope){
 																title:'Invalid feed url.',
 																description: 'No RSS feed found on the saved url.'
 																	
-														    };
+															};
 										setTimeout(function(){
 											$scope.$apply();
 										});
@@ -87,6 +94,13 @@ feedReaderApp.controller ('feedController',function($scope){
 							/*Deletes the feed*/
 							$scope.deleteFeed = function(index){
 								$scope.feeds = myFeeds.deleteFeed(index);
+								if(selectedFeed == index){
+									$scope.activeFeed = {
+											title:'Your feed would be shown below',
+											description: ''
+									};
+								}
+								
 								setTimeout(function(){
 									$scope.$apply();
 								});
@@ -109,9 +123,14 @@ feedReaderApp.controller ('feedController',function($scope){
 									if(!result.error){
 										
 										$scope.feeds = myFeeds.saveFeeds({feedUrl:feedUrl,feedTitle:feedTitle});
+										var latestFeedID = $scope.feeds.length - 1;
+										selectedFeed = latestFeedID;
+										
 										setTimeout(function(){
 											$scope.$apply();
+											$scope.loadFeedData(feedUrl,latestFeedID);
 										});
+										
 										
 										$('#feedUrl').val('');
 										$('#feedTitle').val(''); 

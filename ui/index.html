@@ -17,8 +17,7 @@
 		<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 		<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
 		<script src="https://www.google.com/jsapi"></script>
-		
-		
+
 		<script src="js/main.js"></script>
 		<script src="js/angularController.js"></script>
 	
@@ -41,8 +40,7 @@
 				<!-- cloud of added feeds -->
 				<div id="feedIcons">
 					<span ng-repeat="feed in feeds" class="feedButtonGroup">
-						
-						<button type="button" ng-click="loadFeedData(feed.feedUrl);" class="btn feedButtons">{{feed.feedTitle}}
+						<button id="feedbutton{{$index}}" type="button" ng-click="loadFeedData(feed.feedUrl,$index);" class="btn feedButtons">{{feed.feedTitle}}
 							<i ng-click="deleteFeed($index);" class="glyphicon glyphicon-remove feedCloseIcon"></i>
 						</button>
 					</span>
@@ -57,6 +55,7 @@
 					<hr />
 				</div>
 	
+			
 				<div id="feed">
 					<div class="feedPost panel panel-default"
 						ng-repeat="item in activeFeed.entries">

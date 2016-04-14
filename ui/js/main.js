@@ -6,7 +6,7 @@
 /*initialize google feed api*/
 google.load('feeds', '1');
 
-
+var selectedFeed = null;
 /*pick feeds from localStorage to save them in an object*/
 myFeeds = (function(){
 				/* creating an empty feeds object  */ 
@@ -34,6 +34,7 @@ myFeeds = (function(){
 
 
 $(function(){
+	
 	/*Adding a custom validation method to jQuery validator to make sure only unique feeds are added*/
 	jQuery.validator.addMethod('uniqueFeed', 
 										function(value,element,type){

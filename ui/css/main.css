@@ -72,7 +72,12 @@
 	border: none;
 }
 
-.feedButtons:active, .feedButtons:focus {
+.feedButtons:hover {
+	background-color: #C3EC1F;
+	border: none;
+}
+
+.feedButtonSelected {
 	background-color: #1FEC38;
 	border: none;
 }
