@@ -32,9 +32,22 @@ myFeeds = (function(){
 				return myFeeds; 
 })();
 
+modalLoader = function(text){
+			var modal = 	$('<div id="feedSpinnerModal" class="modal fade modalCenter" role="dialog">'
+								+'<i class="fa fa-spinner fa-spin feedSpinner" style="font-size:48px"></i>'
+								+ '<h1>'+(text?text:'')+'</h1>'
+								+'</div>').modal('show');
+			
+			modal.on('hidden.bs.modal', function(){
+						this.remove();
+				});
+			
+			
+			}
+
 
 $(function(){
-	
+		
 	/*Adding a custom validation method to jQuery validator to make sure only unique feeds are added*/
 	jQuery.validator.addMethod('uniqueFeed', 
 										function(value,element,type){

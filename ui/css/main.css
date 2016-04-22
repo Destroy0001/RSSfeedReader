@@ -78,12 +78,29 @@
 }
 
 .feedButtonSelected {
-	background-color: #1FEC38;
+	background-color: #1FEC38 !important; 
 	border: none;
 }
 
-.feedCloseIcon {
-	left: 10%;
-	top: 50%;
-	border: none;
+.disabled {
+	color: grey !important;
+	background-color: rgb(0, 0, 0, .2) !important;
 }
+
+.modalCenter {
+	text-align: center;
+	font-size: 24em;
+	width: 100%; 
+	height: 100%; 
+}
+.feedSpinner{
+	color: white;
+	top: 50%;
+}
+
+#feedloadSpinner{
+		top:50%;
+		left:50%;
+	
+}
+

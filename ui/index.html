@@ -6,6 +6,7 @@
 		
 		
 		<link	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"	rel="stylesheet">
+		<link	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 		<link	href="css/main.css"	rel="stylesheet">
 		<link	href="css/mainDesktop.css"	rel="stylesheet" media="screen and (min-width: 925px)">
 		<link	href="css/mainTablet.css" rel="stylesheet" media="screen and (max-width: 924px) and (min-width:720px)">
@@ -48,15 +49,13 @@
 			</div>
 	
 			<!-- Main page, shows the feed content as per the selected feed -->
-			<div id="pageContentWrapper" class="text-center">
-				<div id="header">
-					<h1 id="feedHeader"> {{activeFeed.title}} </h1>
-						<h5 id="feedDescription" class="text-muted">{{activeFeed.description}} </h5>
-					<hr />
-				</div>
-	
-			
-				<div id="feed">
+		<div id="pageContentWrapper" class="text-center">
+			<div id="header">
+				<h1 id="feedHeader"> {{activeFeed.title}} </h1>
+					<h5 id="feedDescription" class="text-muted">{{activeFeed.description}} </h5>
+				<hr />
+			</div>
+			<div id="feed">
 					<div class="feedPost panel panel-default"
 						ng-repeat="item in activeFeed.entries">
 						<div class="panel-body">

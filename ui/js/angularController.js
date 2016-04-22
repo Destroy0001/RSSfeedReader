@@ -17,7 +17,7 @@ feedReaderApp.controller ('feedController',function($scope){
 					
 							$scope.activeFeed = {
 														title:'Your feed would be shown below',
-														description: ''
+														description: 'Select a feed by clicking on a feed button'
 												};
 							
 							/*fetches feed information and then loads to the feed view*/
@@ -33,14 +33,14 @@ feedReaderApp.controller ('feedController',function($scope){
 								
 								/*scrolling to the top of the page for the new feed.*/
 								$('html, body').animate({ scrollTop: 0 }, 'slow');
-								
+								modalLoader();
 								/*initializing feed config*/
 								/*hardcoded to get top 25 posts in the feed, would add ui later for the user to choose number of posts*/
 								var feed = new google.feeds.Feed(feedurl);
 								feed.setResultFormat(google.feeds.Feed.MIXED_FORMAT);
 								feed.setNumEntries(25);
-								
 								feed.load(function(result){
+									$("#feedSpinnerModal").modal('hide');
 									if(!result.error){
 										$scope.activeFeed = result.feed;
 										var feedEntries = $scope.activeFeed.entries;
